@@ -15,6 +15,7 @@ namespace MovieDB
         DataGridViewButtonColumn editButton;
         DataGridViewButtonColumn deleteButton;
         int IDInt;
+        string table;
 
         #region Form1 constructor
         public Form1()
@@ -95,7 +96,7 @@ namespace MovieDB
                 sqlDelete.CommandText = queryDeleteString;
                 sqlDelete.Connection = database;
                 sqlDelete.ExecuteNonQuery();
-                string queryString = "SELECT* FROM clients";
+                string queryString = "SELECT * FROM " + table + "";
                 loadDataGrid(queryString);
             }
 
@@ -124,11 +125,17 @@ namespace MovieDB
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string queryString = "SELECT * FROM clients";
+            table = "clients";
+            string queryString = "SELECT * FROM " + table + "";
             loadDataGrid(queryString);
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
         {
 
         }
