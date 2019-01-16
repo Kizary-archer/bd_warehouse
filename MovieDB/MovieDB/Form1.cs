@@ -25,12 +25,8 @@ namespace MovieDB
             string connectionString = "Provider=Microsoft.Ace.OLEDB.12.0;Data Source=Warehouse.mdb";
             try
             {
-
                 database = new OleDbConnection(connectionString);
                 database.Open();
-                //SQL query to list movies
-                string queryString = "SELECT * FROM clients";
-                loadDataGrid(queryString);
             }
             catch (Exception ex)
             {
