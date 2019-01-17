@@ -16,7 +16,8 @@ namespace MovieDB
         DataGridViewButtonColumn deleteButton;
         int IDInt;
         string table;
-        string queryString;
+        string queryString,delstr;
+        
 
         #region Form1 constructor
         public Form1()
@@ -92,7 +93,7 @@ namespace MovieDB
             else if (dataGridView1.Columns[e.ColumnIndex] == deleteButton && currentRow >= 0)
             {
                 // delete sql query
-                string queryDeleteString = "DELETE passport.*, clients.Id_passport FROM passport INNER JOIN clients ON passport.id_passport = clients.Id_passport WHERE((clients.Id_passport) = "+IDInt+")";
+                string queryDeleteString = ""+delstr+" "+IDInt+")";
                 OleDbCommand sqlDelete = new OleDbCommand();
                 sqlDelete.CommandText = queryDeleteString;
                 sqlDelete.Connection = database;
@@ -132,6 +133,7 @@ namespace MovieDB
         private void button1_Click_1(object sender, EventArgs e)
         {
             table = "clients";
+            delstr = "DELETE passport.*, clients.Id_passport FROM passport INNER JOIN clients ON passport.id_passport = clients.Id_passport WHERE((clients.Id_passport) =";
             queryString = "SELECT clients.Id_passport,clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone,passport.Date_issues, passport.Date_of_birth, passport.issued_by FROM passport INNER JOIN clients ON passport.id_passport = clients.Id_passport";
             loadDataGrid(queryString);
         }
@@ -139,14 +141,16 @@ namespace MovieDB
         private void button2_Click_1(object sender, EventArgs e)
         {
             table = "contracts";
-            queryString = "SELECT clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone, tariffs.name_tariffs, status_contracts.status, contracts.date_of_conclusion FROM status_contracts INNER JOIN(tariffs INNER JOIN (clients INNER JOIN contracts ON clients.id_client = contracts.id_client) ON tariffs.id_tariffs = contracts.id_tariffs) ON status_contracts.id_status = contracts.status GROUP BY clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone, tariffs.name_tariffs, status_contracts.status, contracts.date_of_conclusion";
+            delstr = "DELETE contracts.* FROM contracts WHERE((id_contracts) =";
+            queryString = "SELECT contracts.id_contracts,clients.name_client, clients.surname_client,clients.patronymic_client, clients.phone, tariffs.name_tariffs,status_contracts.status, contracts.date_of_conclusion FROM status_contracts INNER JOIN(tariffs INNER JOIN (clients INNER JOIN contracts ON clients.id_client = contracts.id_client) ON tariffs.id_tariffs = contracts.id_tariffs) ON status_contracts.id_status = contracts.status GROUP BY contracts.id_contracts,clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone, tariffs.name_tariffs, status_contracts.status, contracts.date_of_conclusion";
             loadDataGrid(queryString);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            table = "contracts,clients";
-            queryString = "SELECT product.name_product, product.number_product, storage_cells.id_cell, clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone FROM(clients INNER JOIN product ON clients.id_client = product.id_client) INNER JOIN storage_cells ON product.id_product = storage_cells.id_product";
+            table = "product";
+            delstr = "DELETE product.* FROM product WHERE((id_product) =";
+            queryString = "SELECT product.id_product,product.name_product, product.number_product, storage_cells.id_cell, clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone FROM(clients INNER JOIN product ON clients.id_client = product.id_client) INNER JOIN storage_cells ON product.id_product = storage_cells.id_product";
             loadDataGrid(queryString);
         }
     }
