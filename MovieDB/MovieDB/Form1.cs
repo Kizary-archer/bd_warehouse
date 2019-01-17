@@ -93,9 +93,8 @@ namespace MovieDB
             else if (dataGridView1.Columns[e.ColumnIndex] == deleteButton && currentRow >= 0)
             {
                 // delete sql query
-                string queryDeleteString = ""+delstr+" "+IDInt+")";
                 OleDbCommand sqlDelete = new OleDbCommand();
-                sqlDelete.CommandText = queryDeleteString;
+                sqlDelete.CommandText = "" + delstr + " " + IDInt + ")";
                 sqlDelete.Connection = database;
                 sqlDelete.ExecuteNonQuery();
                 loadDataGrid(queryString);
@@ -144,6 +143,34 @@ namespace MovieDB
             delstr = "DELETE contracts.* FROM contracts WHERE((id_contracts) =";
             queryString = "SELECT contracts.id_contracts,clients.name_client, clients.surname_client,clients.patronymic_client, clients.phone, tariffs.name_tariffs,status_contracts.status, contracts.date_of_conclusion FROM status_contracts INNER JOIN(tariffs INNER JOIN (clients INNER JOIN contracts ON clients.id_client = contracts.id_client) ON tariffs.id_tariffs = contracts.id_tariffs) ON status_contracts.id_status = contracts.status GROUP BY contracts.id_contracts,clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone, tariffs.name_tariffs, status_contracts.status, contracts.date_of_conclusion";
             loadDataGrid(queryString);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OleDbCommand sqlInsert = new OleDbCommand();
+                sqlInsert.CommandText = "INSERT INTO passport (Date_issues, Date_of_birth, issued_by)VALUES ('" + textBox5.Text + "', '" + textBox6.Text + "', '" + textBox7.Text + "')";
+                sqlInsert.Connection = database;
+                sqlInsert.ExecuteNonQuery();
+                sqlInsert.CommandText = "SELECT MAX(id_passport) FROM passport";
+                string Maxid = Convert.ToString(sqlInsert.ExecuteScalar());
+                sqlInsert.CommandText = "INSERT INTO clients (name_client,surname_client,patronymic_client,phone,Id_passport)VALUES ('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "', '" + textBox4.Text + "', '" + Maxid + "')";
+                sqlInsert.ExecuteNonQuery();
+                MessageBox.Show(Maxid);
+            }
+            catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
