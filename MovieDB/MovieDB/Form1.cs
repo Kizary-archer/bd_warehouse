@@ -36,6 +36,8 @@ namespace MovieDB
                 MessageBox.Show(ex.Message);
                 return;
             }
+
+            
         }
         #endregion
 
@@ -125,7 +127,37 @@ namespace MovieDB
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (tabControl1.SelectedIndex == 1)
+            {
+                try
+                {
 
+                    OleDbDataAdapter dataAdapter = null;
+                    OleDbCommand sqlInsert = new OleDbCommand();
+                    sqlInsert.CommandText = "SELECT clients.Id_passport,clients.name_client, clients.surname_client, clients.patronymic_client FROM clients";
+                    sqlInsert.Connection = database;
+                    DataTable data = new DataTable();
+                    dataAdapter = new OleDbDataAdapter(sqlInsert);
+                    dataAdapter.Fill(data);
+                    data.Rows.Add(new String[] { "D1", "Natalia", "Developer" });
+                    comboBox1.DataSource = data;
+                    comboBox1.DisplayMember = "name_client";
+                    comboBox1.ValueMember = "Id_passport";
+                    ////////клиенты
+                    DataTable data2 = new DataTable();
+                    sqlInsert.CommandText = "SELECT name_tariffs FROM tariffs";
+                    dataAdapter = new OleDbDataAdapter(sqlInsert);
+                    dataAdapter.Fill(data2);
+                    comboBox2.DataSource = data2;
+                    comboBox2.DisplayMember = "name_tariffs";
+                    comboBox2.ValueMember = "name_tariffs";
+
+
+
+
+                }
+                catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
+            }
         }
 
 
@@ -160,7 +192,7 @@ namespace MovieDB
             try
             {
                 OleDbCommand sqlInsert = new OleDbCommand();
-                sqlInsert.CommandText = "INSERT INTO passport (Date_issues, Date_of_birth, issued_by)VALUES ('" + textBox5.Text + "', '" + textBox6.Text + "', '" + textBox7.Text + "')";
+                sqlInsert.CommandText = "INSERT INTO passport (Date_issues, Date_of_birth, issued_by)VALUES ('" + Convert.ToString(dateTimePicker2.Text) + "', '" + Convert.ToString(dateTimePicker3.Text) + "', '" + textBox7.Text + "')";
                 sqlInsert.Connection = database;
                 sqlInsert.ExecuteNonQuery();
                 sqlInsert.CommandText = "SELECT MAX(id_passport) FROM passport";
@@ -170,6 +202,34 @@ namespace MovieDB
                 MessageBox.Show(Maxid);
             }
             catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OleDbCommand sqlInsert = new OleDbCommand();
+                sqlInsert.CommandText = "INSERT INTO passport (Date_issues, Date_of_birth, issued_by)VALUES ('" + Convert.ToString(dateTimePicker2.Text) + "', '" + Convert.ToString(dateTimePicker3.Text) + "', '" + textBox7.Text + "')";
+                sqlInsert.Connection = database;
+                sqlInsert.ExecuteNonQuery();
+            }
+            catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
 
         }
 
