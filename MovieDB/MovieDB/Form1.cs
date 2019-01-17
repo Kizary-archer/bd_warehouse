@@ -134,23 +134,22 @@ namespace MovieDB
 
                     OleDbDataAdapter dataAdapter = null;
                     OleDbCommand sqlInsert = new OleDbCommand();
-                    sqlInsert.CommandText = "SELECT clients.Id_passport,clients.name_client, clients.surname_client, clients.patronymic_client FROM clients";
+                    sqlInsert.CommandText = "SELECT clients.id_client,clients.name_client, clients.surname_client, clients.patronymic_client FROM clients";
                     sqlInsert.Connection = database;
                     DataTable data = new DataTable();
                     dataAdapter = new OleDbDataAdapter(sqlInsert);
                     dataAdapter.Fill(data);
-                    data.Rows.Add(new String[] { "D1", "Natalia", "Developer" });
                     comboBox1.DataSource = data;
                     comboBox1.DisplayMember = "name_client";
-                    comboBox1.ValueMember = "Id_passport";
+                    comboBox1.ValueMember = "id_client";
                     ////////клиенты
                     DataTable data2 = new DataTable();
-                    sqlInsert.CommandText = "SELECT name_tariffs FROM tariffs";
+                    sqlInsert.CommandText = "SELECT name_tariffs,id_tariffs FROM tariffs";
                     dataAdapter = new OleDbDataAdapter(sqlInsert);
                     dataAdapter.Fill(data2);
                     comboBox2.DataSource = data2;
                     comboBox2.DisplayMember = "name_tariffs";
-                    comboBox2.ValueMember = "name_tariffs";
+                    comboBox2.ValueMember = "id_tariffs";
 
 
 
@@ -221,7 +220,7 @@ namespace MovieDB
             try
             {
                 OleDbCommand sqlInsert = new OleDbCommand();
-                sqlInsert.CommandText = "INSERT INTO passport (Date_issues, Date_of_birth, issued_by)VALUES ('" + Convert.ToString(dateTimePicker2.Text) + "', '" + Convert.ToString(dateTimePicker3.Text) + "', '" + textBox7.Text + "')";
+                sqlInsert.CommandText = "INSERT INTO contracts (id_client,id_tariffs,date_of_conclusion,status)VALUES ('" + Convert.ToString(comboBox1.SelectedValue) + "', '" + Convert.ToString(comboBox2.SelectedValue) + "','" + Convert.ToString(dateTimePicker1.Text) + "','1')";
                 sqlInsert.Connection = database;
                 sqlInsert.ExecuteNonQuery();
             }
