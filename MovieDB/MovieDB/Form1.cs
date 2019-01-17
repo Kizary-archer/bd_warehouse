@@ -16,6 +16,7 @@ namespace MovieDB
         DataGridViewButtonColumn deleteButton;
         int IDInt;
         string table;
+        string queryString;
 
         #region Form1 constructor
         public Form1()
@@ -54,15 +55,9 @@ namespace MovieDB
             dataGridView1.DataSource = data;
             dataGridView1.AllowUserToAddRows = false; // remove the null line
             dataGridView1.ReadOnly = true;
-          /*  if (table == "clients")
-            {
-                dataGridView1.Columns["id_client"].Visible = false;
-                dataGridView1.Columns["id_passport"].Visible = false;
-            }else if( table == "contracts")
-                {
-                dataGridView1.Columns["id_contracts"].Visible = false;
-            }*/
-            // insert edit button into datagridview
+
+             dataGridView1.Columns[0].Visible = false;
+
             editButton = new DataGridViewButtonColumn();
             editButton.HeaderText = "Edit";
             editButton.Text = "Edit";
@@ -97,12 +92,11 @@ namespace MovieDB
             else if (dataGridView1.Columns[e.ColumnIndex] == deleteButton && currentRow >= 0)
             {
                 // delete sql query
-                string queryDeleteString = "DELETE clients.*, passport.* FROM passport INNER JOIN clients ON passport.id_passport = clients.Id_passport WHERE((`id_passport` = 1))";
+                string queryDeleteString = "DELETE passport.*, clients.Id_passport FROM passport INNER JOIN clients ON passport.id_passport = clients.Id_passport WHERE((clients.Id_passport) = "+IDInt+")";
                 OleDbCommand sqlDelete = new OleDbCommand();
                 sqlDelete.CommandText = queryDeleteString;
                 sqlDelete.Connection = database;
                 sqlDelete.ExecuteNonQuery();
-                string queryString = "SELECT * FROM " + table + "";
                 loadDataGrid(queryString);
             }
 
@@ -131,45 +125,28 @@ namespace MovieDB
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            table = "clients";
-            string queryString = "SELECT * FROM " + table + "";
-            loadDataGrid(queryString);
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-            table = "clients";
-            string queryString = "SELECT * FROM " + table + "";
-            loadDataGrid(queryString);
-        }
-
-        private void tabPage3_Click(object sender, EventArgs e)
-        {
 
         }
 
-        private void tabPage4_Click(object sender, EventArgs e)
-        {
 
-        }
         private void button1_Click_1(object sender, EventArgs e)
         {
             table = "clients";
-            string queryString = "SELECT clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone, passport.Date_issues, passport.Date_of_birth, passport.issued_by FROM passport INNER JOIN clients ON passport.id_passport = clients.Id_passport";
+            queryString = "SELECT clients.Id_passport,clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone,passport.Date_issues, passport.Date_of_birth, passport.issued_by FROM passport INNER JOIN clients ON passport.id_passport = clients.Id_passport";
             loadDataGrid(queryString);
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
             table = "contracts";
-            string queryString = "SELECT clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone, tariffs.name_tariffs, status_contracts.status, contracts.date_of_conclusion FROM status_contracts INNER JOIN(tariffs INNER JOIN (clients INNER JOIN contracts ON clients.id_client = contracts.id_client) ON tariffs.id_tariffs = contracts.id_tariffs) ON status_contracts.id_status = contracts.status GROUP BY clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone, tariffs.name_tariffs, status_contracts.status, contracts.date_of_conclusion";
+            queryString = "SELECT clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone, tariffs.name_tariffs, status_contracts.status, contracts.date_of_conclusion FROM status_contracts INNER JOIN(tariffs INNER JOIN (clients INNER JOIN contracts ON clients.id_client = contracts.id_client) ON tariffs.id_tariffs = contracts.id_tariffs) ON status_contracts.id_status = contracts.status GROUP BY clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone, tariffs.name_tariffs, status_contracts.status, contracts.date_of_conclusion";
             loadDataGrid(queryString);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             table = "contracts,clients";
-            string queryString = "SELECT product.name_product, product.number_product, storage_cells.id_cell, clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone FROM(clients INNER JOIN product ON clients.id_client = product.id_client) INNER JOIN storage_cells ON product.id_product = storage_cells.id_product";
+            queryString = "SELECT product.name_product, product.number_product, storage_cells.id_cell, clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone FROM(clients INNER JOIN product ON clients.id_client = product.id_client) INNER JOIN storage_cells ON product.id_product = storage_cells.id_product";
             loadDataGrid(queryString);
         }
     }
