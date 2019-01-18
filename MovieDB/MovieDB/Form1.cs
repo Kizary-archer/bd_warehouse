@@ -61,13 +61,7 @@ namespace MovieDB
 
              dataGridView1.Columns[0].Visible = false;
 
-            editButton = new DataGridViewButtonColumn();
-            editButton.HeaderText = "Edit";
-            editButton.Text = "Edit";
-            editButton.UseColumnTextForButtonValue = true;
-            editButton.Width = 80;
-            dataGridView1.Columns.Add(editButton);
-            // insert delete button to datagridview
+            
             deleteButton = new DataGridViewButtonColumn();
             deleteButton.HeaderText = "Delete";
             deleteButton.Text = "Delete";
@@ -232,7 +226,6 @@ namespace MovieDB
                 string Maxid = Convert.ToString(sqlInsert.ExecuteScalar());
                 sqlInsert.CommandText = "INSERT INTO clients (name_client,surname_client,patronymic_client,phone,Id_passport)VALUES ('" + textBox1.Text + "', '" + textBox2.Text + "', '" + textBox3.Text + "', '" + textBox4.Text + "', '" + Maxid + "')";
                 sqlInsert.ExecuteNonQuery();
-                MessageBox.Show(Maxid);
             }
             catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
 
