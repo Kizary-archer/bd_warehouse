@@ -155,7 +155,7 @@ namespace MovieDB
 
 
                 }
-                catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
+                catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные2"); }
             }
             if (tabControl1.SelectedIndex == 2)
             {
@@ -174,7 +174,7 @@ namespace MovieDB
                     comboBox3.ValueMember = "id_client";
                     ////////клиенты
                     DataTable data2 = new DataTable();
-                    sqlInsert.CommandText = "SELECT contracts.* FROM contracts";
+                    sqlInsert.CommandText = "SELECT contracts.* FROM contracts WHERE id_client = " + Convert.ToString(comboBox3.SelectedValue) + "";
                     dataAdapter = new OleDbDataAdapter(sqlInsert);
                     dataAdapter.Fill(data2);
                     comboBox4.DataSource = data2;
@@ -182,14 +182,14 @@ namespace MovieDB
                     comboBox4.ValueMember = "id_contracts";
                     ////////контракты
                     DataTable data3 = new DataTable();
-                    sqlInsert.CommandText = "SELECT storage_cells.* FROM storage_cells";
+                    sqlInsert.CommandText = "SELECT storage_cells.* FROM storage_cells LEFT JOIN product ON storage_cells.id_cell = product.id_cells WHERE product.id_cells IS NULL";
                     dataAdapter = new OleDbDataAdapter(sqlInsert);
                     dataAdapter.Fill(data3);
                     comboBox5.DataSource = data3;
                     comboBox5.DisplayMember = "name_cell";
                     comboBox5.ValueMember = "id_cell";
                 }
-                catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
+                catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные1"); }
             }
         }
 
@@ -276,6 +276,72 @@ namespace MovieDB
                 sqlInsert.ExecuteNonQuery();
             }
             catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (textBox8.Text != "")
+            {
+                queryString = "SELECT clients.* FROM clients WHERE name_client LIKE '" + textBox8.Text + "%'";
+                loadDataGrid(queryString);
+            }
+            else
+            {
+                MessageBox.Show("¬ведите запрос", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (textBox8.Text != "")
+            {
+                queryString = "SELECT contracts.* FROM contracts WHERE id_contracts LIKE '" + textBox8.Text + "%'";
+                loadDataGrid(queryString);
+            }
+            else
+            {
+                MessageBox.Show("¬ведите запрос", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (textBox8.Text != "")
+            {
+                queryString = "SELECT product.* FROM product WHERE name_product LIKE '" + textBox8.Text + "%'";
+                loadDataGrid(queryString);
+            }
+            else
+            {
+                MessageBox.Show("¬ведите запрос", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                OleDbDataAdapter dataAdapter = null;
+                OleDbCommand sqlInsert = new OleDbCommand();
+                sqlInsert.Connection = database;
+                DataTable data2 = new DataTable();
+                sqlInsert.CommandText = "SELECT contracts.* FROM contracts WHERE id_client = " + Convert.ToString(comboBox3.SelectedValue) + "";
+                dataAdapter = new OleDbDataAdapter(sqlInsert);
+                dataAdapter.Fill(data2);
+                comboBox4.DataSource = data2;
+                comboBox4.DisplayMember = "id_contracts";
+                comboBox4.ValueMember = "id_contracts";
+                ////////контракты
+                DataTable data3 = new DataTable();
+                sqlInsert.CommandText = "SELECT storage_cells.* FROM storage_cells LEFT JOIN product ON storage_cells.id_cell = product.id_cells WHERE product.id_cells IS NULL"; 
+                dataAdapter = new OleDbDataAdapter(sqlInsert);
+                dataAdapter.Fill(data3);
+                comboBox5.DataSource = data3;
+                comboBox5.DisplayMember = "name_cell";
+                comboBox5.ValueMember = "id_cell";
+            }
+            catch (Exception ex) {}
         }
 
         private void button3_Click(object sender, EventArgs e)
