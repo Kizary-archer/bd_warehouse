@@ -18,3 +18,13 @@ D:\Max\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.csproj.GenerateResource.ca
 D:\Max\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.csproj.CoreCompileInputs.cache
 D:\Max\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.exe
 D:\Max\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.pdb
+C:\Users\Max\Desktop\bd_warehouse\MovieDB\MovieDB\bin\Debug\MovieDB.exe
+C:\Users\Max\Desktop\bd_warehouse\MovieDB\MovieDB\bin\Debug\MovieDB.pdb
+C:\Users\Max\Desktop\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.csprojAssemblyReference.cache
+C:\Users\Max\Desktop\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.Form1.resources
+C:\Users\Max\Desktop\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.Form2.resources
+C:\Users\Max\Desktop\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.Properties.Resources.resources
+C:\Users\Max\Desktop\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.csproj.GenerateResource.cache
+C:\Users\Max\Desktop\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.csproj.CoreCompileInputs.cache
+C:\Users\Max\Desktop\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.exe
+C:\Users\Max\Desktop\bd_warehouse\MovieDB\MovieDB\obj\Debug\MovieDB.pdb

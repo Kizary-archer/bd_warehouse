@@ -28,7 +28,7 @@ namespace MovieDB
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.button5 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -54,6 +54,10 @@ namespace MovieDB
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -71,10 +75,9 @@ namespace MovieDB
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.tabPage8.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -318,6 +321,9 @@ namespace MovieDB
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button10);
+            this.tabPage2.Controls.Add(this.button12);
+            this.tabPage2.Controls.Add(this.button11);
             this.tabPage2.Controls.Add(this.button9);
             this.tabPage2.Controls.Add(this.button8);
             this.tabPage2.Controls.Add(this.button7);
@@ -333,6 +339,43 @@ namespace MovieDB
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Поиск/изменение БД";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(404, 105);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(122, 23);
+            this.button9.TabIndex = 8;
+            this.button9.Text = "Найти продукцию";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(404, 62);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(122, 23);
+            this.button8.TabIndex = 7;
+            this.button8.Text = "Найти договор";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(404, 21);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(122, 23);
+            this.button7.TabIndex = 6;
+            this.button7.Text = "Найти клиента";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(214, 65);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(177, 20);
+            this.textBox8.TabIndex = 5;
             // 
             // button3
             // 
@@ -368,14 +411,14 @@ namespace MovieDB
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(6, 160);
             this.dataGridView1.Name = "dataGridView1";
@@ -514,42 +557,35 @@ namespace MovieDB
             this.label11.TabIndex = 0;
             this.label11.Text = "Название продукции";
             // 
-            // textBox8
+            // button11
             // 
-            this.textBox8.Location = new System.Drawing.Point(214, 65);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(177, 20);
-            this.textBox8.TabIndex = 5;
+            this.button11.Location = new System.Drawing.Point(570, 55);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(169, 29);
+            this.button11.TabIndex = 10;
+            this.button11.Text = "колличество клиентов";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // button7
+            // button12
             // 
-            this.button7.Location = new System.Drawing.Point(404, 21);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(122, 23);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Найти клиента";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button12.Location = new System.Drawing.Point(761, 55);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(169, 27);
+            this.button12.TabIndex = 11;
+            this.button12.Text = "колличество договоров";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
-            // button8
+            // button10
             // 
-            this.button8.Location = new System.Drawing.Point(404, 62);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(122, 23);
-            this.button8.TabIndex = 7;
-            this.button8.Text = "Найти договор";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(404, 105);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(122, 23);
-            this.button9.TabIndex = 8;
-            this.button9.Text = "Найти продукцию";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button10.Location = new System.Drawing.Point(953, 54);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(169, 29);
+            this.button10.TabIndex = 12;
+            this.button10.Text = "колличество товаров";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // Form1
             // 
@@ -624,6 +660,9 @@ namespace MovieDB
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button11;
     }
 }
 

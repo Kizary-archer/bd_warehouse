@@ -189,7 +189,7 @@ namespace MovieDB
                     comboBox5.DisplayMember = "name_cell";
                     comboBox5.ValueMember = "id_cell";
                 }
-                catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные1"); }
+                catch (Exception ex) {}
             }
         }
 
@@ -342,6 +342,30 @@ namespace MovieDB
                 comboBox5.ValueMember = "id_cell";
             }
             catch (Exception ex) {}
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+                OleDbCommand sqlInsert = new OleDbCommand();
+                sqlInsert.CommandText = "SELECT count(*) FROM clients";
+                sqlInsert.Connection = database;
+                MessageBox.Show(Convert.ToString(sqlInsert.ExecuteScalar()));
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            OleDbCommand sqlInsert = new OleDbCommand();
+            sqlInsert.CommandText = "SELECT count(*) FROM contracts";
+            sqlInsert.Connection = database;
+            MessageBox.Show(Convert.ToString(sqlInsert.ExecuteScalar()));
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            OleDbCommand sqlInsert = new OleDbCommand();
+            sqlInsert.CommandText = "SELECT count(*) FROM product";
+            sqlInsert.Connection = database;
+            MessageBox.Show(Convert.ToString(sqlInsert.ExecuteScalar()));
         }
 
         private void button3_Click(object sender, EventArgs e)
