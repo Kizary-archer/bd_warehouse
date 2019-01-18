@@ -134,7 +134,7 @@ namespace MovieDB
 
                     OleDbDataAdapter dataAdapter = null;
                     OleDbCommand sqlInsert = new OleDbCommand();
-                    sqlInsert.CommandText = "SELECT clients.id_client,clients.name_client, clients.surname_client, clients.patronymic_client FROM clients";
+                    sqlInsert.CommandText = "SELECT clients.* FROM clients";
                     sqlInsert.Connection = database;
                     DataTable data = new DataTable();
                     dataAdapter = new OleDbDataAdapter(sqlInsert);
@@ -144,7 +144,7 @@ namespace MovieDB
                     comboBox1.ValueMember = "id_client";
                     ////////клиенты
                     DataTable data2 = new DataTable();
-                    sqlInsert.CommandText = "SELECT name_tariffs,id_tariffs FROM tariffs";
+                    sqlInsert.CommandText = "SELECT tariffs.* FROM tariffs";
                     dataAdapter = new OleDbDataAdapter(sqlInsert);
                     dataAdapter.Fill(data2);
                     comboBox2.DataSource = data2;
@@ -154,6 +154,40 @@ namespace MovieDB
 
 
 
+                }
+                catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
+            }
+            if (tabControl1.SelectedIndex == 2)
+            {
+                try
+                {
+
+                    OleDbDataAdapter dataAdapter = null;
+                    OleDbCommand sqlInsert = new OleDbCommand();
+                    sqlInsert.CommandText = "SELECT clients.* FROM clients";
+                    sqlInsert.Connection = database;
+                    DataTable data = new DataTable();
+                    dataAdapter = new OleDbDataAdapter(sqlInsert);
+                    dataAdapter.Fill(data);
+                    comboBox3.DataSource = data;
+                    comboBox3.DisplayMember = "name_client";
+                    comboBox3.ValueMember = "id_client";
+                    ////////клиенты
+                    DataTable data2 = new DataTable();
+                    sqlInsert.CommandText = "SELECT contracts.* FROM contracts";
+                    dataAdapter = new OleDbDataAdapter(sqlInsert);
+                    dataAdapter.Fill(data2);
+                    comboBox4.DataSource = data2;
+                    comboBox4.DisplayMember = "id_contracts";
+                    comboBox4.ValueMember = "id_contracts";
+                    ////////контракты
+                    DataTable data3 = new DataTable();
+                    sqlInsert.CommandText = "SELECT storage_cells.* FROM storage_cells";
+                    dataAdapter = new OleDbDataAdapter(sqlInsert);
+                    dataAdapter.Fill(data3);
+                    comboBox5.DataSource = data3;
+                    comboBox5.DisplayMember = "name_cell";
+                    comboBox5.ValueMember = "id_cell";
                 }
                 catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
             }
@@ -232,11 +266,23 @@ namespace MovieDB
 
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OleDbCommand sqlInsert = new OleDbCommand();
+                sqlInsert.CommandText = "INSERT INTO product ( name_product, number_product, id_client, id_contracts, id_cells )VALUES ('" + textBox5.Text + "','" + textBox6.Text + "','" + Convert.ToString(comboBox3.SelectedValue) + "', '" + Convert.ToString(comboBox4.SelectedValue) + "','" + Convert.ToString(comboBox5.SelectedValue) + "')";
+                sqlInsert.Connection = database;
+                sqlInsert.ExecuteNonQuery();
+            }
+            catch (Exception ex) { MessageBox.Show("¬ведены некорректные данные"); }
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             table = "product";
             delstr = "DELETE product.* FROM product WHERE((id_product) =";
-            queryString = "SELECT product.id_product,product.name_product, product.number_product, storage_cells.id_cell, clients.name_client, clients.surname_client, clients.patronymic_client, clients.phone FROM(clients INNER JOIN product ON clients.id_client = product.id_client) INNER JOIN storage_cells ON product.id_product = storage_cells.id_product";
+            queryString = "SELECT product.id_product, product.name_product, product.number_product, clients.name_client, clients.surname_client, clients.patronymic_client, clients.Id_passport, contracts.id_contracts, storage_cells.name_cell FROM storage_cells INNER JOIN((clients INNER JOIN contracts ON clients.id_client = contracts.id_client) INNER JOIN product ON(clients.id_client = product.id_client) AND(contracts.id_contracts = product.id_contracts)) ON storage_cells.id_cell = product.id_cells";
             loadDataGrid(queryString);
         }
     }
